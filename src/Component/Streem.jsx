@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Style/Streem.css';
+import './Style/streem.css';
+// import "./Style/Exam.css";
 
 const Streem = () => {
   return (
