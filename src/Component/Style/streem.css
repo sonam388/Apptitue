@@ -1,0 +1,203 @@
+/* =========================
+   VARIABLES & FONTS
+   ========================= */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-color: #f8fafc;
+  --text-main: #1e293b;
+  --text-light: #64748b;
+  --mern-color: #10b981;  /* Green */
+  --py-color: #3b82f6;    /* Blue */
+  --ds-color: #8b5cf6;    /* Purple */
+  --shadow-hover: 0 20px 40px -5px rgba(0,0,0,0.1);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+}
+
+/* =========================
+   PAGE WRAPPER
+   ========================= */
+.stream-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253,16%,90%,1) 0, transparent 50%), 
+    radial-gradient(at 100% 100%, hsla(225,39%,90%,1) 0, transparent 50%);
+}
+
+/* =========================
+   HEADER
+   ========================= */
+.header-section {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeInDown 0.8s ease;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 10px 0;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* =========================
+   GRID CONTAINER
+   ========================= */
+.boxc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 650px;
+  perspective: 1000px; /* For 3D effect */
+}
+
+/* =========================
+   CARDS (Common Styles)
+   ========================= */
+.stream-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  position: relative;
+  height: 100%;
+}
+
+.stream-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 30px;
+  text-decoration: none;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Icons --- */
+.icon-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  transition: transform 0.4s ease;
+}
+
+.stream-card:hover .icon-wrapper {
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* --- Text Content --- */
+.card-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 10px 0;
+}
+
+.card-content p {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin: 0 0 30px 0;
+  line-height: 1.5;
+}
+
+/* --- Arrow Button --- */
+.arrow-btn {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: auto; /* Pushes to bottom */
+  display: inline-flex;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.stream-card:hover .arrow-btn {
+  transform: translateX(5px);
+}
+
+/* =========================
+   SPECIFIC THEMES (Luxury Colors)
+   ========================= */
+
+/* 1. MERN (Easy) */
+.stream-card.easy .mern-icon {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--mern-color);
+}
+.stream-card.easy:hover { border-color: var(--mern-color); }
+.stream-card.easy .arrow-btn { color: var(--mern-color); }
+
+/* 2. Python (Medium) */
+.stream-card.medium .python-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--py-color);
+}
+.stream-card.medium:hover { border-color: var(--py-color); }
+.stream-card.medium .arrow-btn { color: var(--py-color); }
+
+/* 3. Data Science (Hard) */
+.stream-card.hard .data-icon {
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--ds-color);
+}
+.stream-card.hard:hover { border-color: var(--ds-color); }
+.stream-card.hard .arrow-btn { color: var(--ds-color); }
+
+/* =========================
+   ANIMATIONS & RESPONSIVE
+   ========================= */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .header-section { margin-bottom: 40px; }
+  .title { font-size: 2.2rem; }
+  .boxc { grid-template-columns: 1fr; } /* Single column on mobile */
+  .stream-card { margin-bottom: 0; }
+  .card-link { padding: 30px; }
+}

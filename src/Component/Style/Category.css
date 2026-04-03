@@ -1,0 +1,179 @@
+/* Category.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* 1. Page Layout */
+.category-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fc;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+}
+
+/* 2. Header Styling */
+.header-content {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.header-content h1 {
+  font-size: 3rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.header-content p {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+/* 3. Grid Container for Cards */
+.boxc {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Columns side by side */
+  gap: 30px;
+  width: 90%;
+  max-width: 600px;
+}
+
+/* 4. General Card Styling */
+.level-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  background: white;
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0; /* Hidden initially for animation */
+}
+
+/* Animation Delays for Staggered Effect */
+.level-card.easy { animation-delay: 0.1s; }
+.level-card.medium { animation-delay: 0.2s; }
+.level-card.hard { animation-delay: 0.3s; }
+
+/* Link Styling (Fill the card) */
+.level-card a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  color: #333;
+}
+
+/* Icon Container */
+.icon-box {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  transition: transform 0.4s ease;
+}
+
+.level-card span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 5. Specific Themes (Colors & Gradients) */
+
+/* EASY - Green */
+.easy {
+  border-bottom: 6px solid #10b981;
+}
+.easy .icon-box { color: #10b981; }
+.easy:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(16, 185, 129, 0.2);
+}
+/* Leaf Animation on Hover */
+.easy:hover .icon-box {
+  transform: rotate(-15deg) scale(1.1);
+}
+
+/* MEDIUM - Orange */
+.medium {
+  border-bottom: 6px solid #f59e0b;
+}
+.medium .icon-box { color: #f59e0b; }
+.medium:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(245, 158, 11, 0.2);
+}
+/* Spinner Animation on Hover */
+.medium:hover .icon-box i {
+  animation: spin 1s linear infinite;
+}
+
+/* HARD - Red */
+.hard {
+  border-bottom: 6px solid #ef4444;
+}
+.hard .icon-box { color: #ef4444; }
+.hard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(239, 68, 68, 0.25);
+}
+/* Bolt Animation on Hover */
+.hard:hover .icon-box {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+/* 6. Animations Keyframes */
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* 7. Responsive Design (Mobile) */
+@media (max-width: 768px) {
+  .boxc {
+    grid-template-columns: 1fr; /* Stack in 1 column */
+    gap: 20px;
+  }
+  
+  .header-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .level-card a {
+    flex-direction: row; /* Horizontal layout on mobile */
+    justify-content: flex-start;
+    padding: 30px;
+  }
+  
+  .icon-box {
+    margin-bottom: 0;
+    margin-right: 20px;
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,188 @@
+/* Style/Test.css */
+
+/* 1. Google Font Import for Modern Typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --primary-color: #6366f1; /* Modern Indigo */
+  --secondary-color: #a855f7; /* Purple for gradients */
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --hover-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
+  --radius: 20px;
+}
+
+/* Page Background */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-gradient);
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 2. Main Card Container */
+.test-box {
+  display: flex;
+  flex-direction: row;
+  background: var(--card-bg);
+  width: 80%;
+  max-width: 600px;
+  border-radius: var(--radius);
+  /* Glassmorphism subtle border */
+  border: 1px solid rgba(255, 255, 255, 0.5); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* CRITICAL FIX: Margin left only applies if space permits (removed hardcoding) */
+  margin: 0 auto; 
+}
+
+/* Desktop Sidebar Logic (Assuming you have a sidebar) */
+@media (min-width: 1200px) {
+  .test-box {
+    /* Agar left sidebar hai to margin yahan adjust karein, par responsive logic ke saath */
+    /* margin-left: 20rem; <--- Isko hatakar parent container (layout) se handle karna behtar hai.
+       Lekin agar aapko yahi chahiye, to is media query ke andar rakhein. */
+  }
+}
+
+/* Hover Effect on the whole card */
+.test-box:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
+
+/* 3. Image Section */
+.t {
+  flex: 1.2; /* Image takes slightly more width */
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  object-fit: cover;
+}
+
+.tt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+/* Zoom effect on image hover */
+.test-box:hover .tt {
+  transform: scale(1.05);
+}
+
+/* Overlay text on image (Optional decorative touch) */
+.t::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+}
+
+/* 4. List Section */
+.list {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 5. Link Styling */
+.list a {
+  text-decoration: none;
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.test-para {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  padding: 18px 25px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Arrow Icon */
+.test-para::after {
+  content: '➜';
+  font-size: 0.9rem;
+  opacity: 0.5;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+/* Fancy Hover Effects */
+.list a:hover .test-para {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-color: transparent;
+  padding-left: 35px; /* Slide text */
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.list a:hover .test-para::after {
+  color: white;
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+/* Hide HR lines - CSS Borders are cleaner */
+.list hr {
+  display: none;
+}
+
+/* 6. Responsive Design (Mobile & Tablet) */
+
+/* Tablet Portrait */
+@media (max-width: 992px) {
+  .test-box {
+    margin-left: 0; /* Reset margin */
+    flex-direction: column;
+    max-width: 500px;
+  }
+  
+  .t {
+    min-height: 250px;
+    flex: none;
+  }
+  
+  .list {
+    padding: 30px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .page-container {
+    padding: 10px;
+  }
+
+  .test-para {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+  
+  .t {
+    min-height: 200px;
+  }
+}

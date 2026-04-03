@@ -1,0 +1,183 @@
+/* --- Base Styles --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.modern-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../Images/test-bg.jpg'); /* Ensure path is correct */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parallax effect */
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- Dark Gradient Overlay --- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.modern-content {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 600px;
+  padding: 40px 20px;
+}
+
+/* --- Typography --- */
+.header-section {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.header-section h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-section p {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* --- Grid Layout --- */
+.modern-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 10px;
+}
+
+/* --- Modern Card Design --- */
+.modern-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  
+  /* Initial Animation State */
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Hover Effects */
+.modern-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px -10px var(--accent-color);
+}
+
+/* Card Icon Circle */
+.card-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-right: 20px;
+  transition: 0.3s;
+}
+
+.modern-card:hover .card-icon {
+  background: var(--accent-color);
+  color: #0f172a;
+}
+
+/* Card Text */
+.card-info {
+  flex: 1;
+}
+
+.card-info h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.card-info p {
+  margin: 5px 0 0;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+/* Arrow Animation */
+.card-arrow {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.card-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.modern-card:hover .card-arrow {
+  opacity: 1;
+  color: var(--accent-color);
+  transform: translateX(5px);
+}
+
+/* --- Animations --- */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 768px) {
+  .header-section h1 {
+    font-size: 2rem;
+  }
+  
+  .modern-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+
+  .modern-card {
+    padding: 20px;
+  }
+}

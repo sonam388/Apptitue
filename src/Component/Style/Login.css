@@ -1,0 +1,348 @@
+/* =========================
+   VARIABLES & RESET
+   ========================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --text-main: #111827;
+  --text-light: #6b7280;
+  --bg-input: #f9fafb;
+  --border-color: #e5e7eb;
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+}
+
+/* =========================
+   LAYOUT CONTAINER
+   ========================= */
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* =========================
+   LEFT SIDE (FORM)
+   ========================= */
+.login-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px clamp(20px, 8vw, 100px); /* Responsive padding */
+  background: white;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header */
+.login-header {
+  margin-bottom: 40px;
+}
+
+.brand-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.logo-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.login-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.login-header p {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* Form Styling */
+.login-form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper .icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #9ca3af;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 14px 14px 14px 44px; /* Space for icon */
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--text-main);
+  outline: none;
+  transition: var(--transition);
+}
+
+.input-wrapper input:focus {
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* Actions (Remember & Forgot) */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.remember-me input {
+  width: 16px; height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.forgot-pass {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.forgot-pass:hover { text-decoration: underline; }
+
+/* Button */
+.btn-login {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-login:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+}
+
+.btn-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Signup Link */
+.signup-text {
+  text-align: center;
+  margin-top: 24px;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.signup-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-link:hover { text-decoration: underline; }
+
+/* Footer */
+.login-footer {
+  margin-top: auto;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  padding-top: 20px;
+}
+
+/* =========================
+   RIGHT SIDE (IMAGE)
+   ========================= */
+.login-right {
+  flex: 1.2; /* Slightly wider than form */
+  position: relative;
+  overflow: hidden;
+  background-color: #f3f4f6;
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: zoomSlow 20s infinite alternate;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px;
+  z-index: 1;
+}
+
+.quote-box {
+  color: white;
+  max-width: 500px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.quote-box p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.quote-box span {
+  font-size: 1rem;
+  opacity: 0.8;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================
+   ANIMATIONS & SPINNER
+   ========================= */
+@keyframes zoomSlow {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.spinner {
+  width: 20px; height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+@media (max-width: 900px) {
+  .login-right {
+    display: none; /* Hide image on tablet/mobile */
+  }
+  
+  .login-left {
+    padding: 40px 20px;
+    align-items: center; /* Center form horizontally */
+  }
+  
+  .login-header {
+    text-align: center;
+  }
+  
+  .login-header h1 {
+    font-size: 2rem;
+  }
+}
+
+
+/* ... Existing code ... */
+
+/* =========================
+   ADDITIONS FOR TOGGLE
+   ========================= */
+
+/* Cursor pointer for the toggle link */
+.signup-link {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Smooth Fade In Animation */
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Extra Slide animation for new inputs */
+.slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Agar Signup pe image change hoti hai, toh usme bhi transition */
+.bg-image {
+  transition: opacity 0.5s ease-in-out;
+}
