@@ -7,7 +7,7 @@ const Exam = () => {
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
-  const [timeLeft, setTimeLeft] = useState(600);
+  const [timeLeft, setTimeLeft] = useState(1800);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
