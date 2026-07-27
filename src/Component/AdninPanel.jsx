@@ -5,6 +5,9 @@ import { MdDeleteForever } from "react-icons/md";
 // import axios from "../api/Axios";
 import './Style/AdminPanel.css';
 import axios from "axios";
+import { GrUserAdmin } from "react-icons/gr";
+import { FaQuestionCircle } from "react-icons/fa";
+import { MdOutlinePendingActions } from "react-icons/md";
 
 function AdminPanel() {
   const [activeTab, setActiveTab] = useState("pending");
@@ -185,7 +188,7 @@ function AdminPanel() {
 
   return (
     <div className="admin-container">
-      <h1 className="admin-title">🔐 Admin Dashboard</h1>
+      <h1 className="admin-title"><GrUserAdmin /> Admin Dashboard</h1>
 
       {/* Tabs */}
       <div className="admin-tabs">
@@ -193,13 +196,13 @@ function AdminPanel() {
           className={`tab-btn ${activeTab === "pending" ? "active" : ""}`}
           onClick={() => setActiveTab("pending")}
         >
-          📝 Pending Tests ({pendingTests.length})
+          <MdOutlinePendingActions /> Pending Tests ({pendingTests.length})
         </button>
         <button
           className={`tab-btn ${activeTab === "questions" ? "active" : ""}`}
           onClick={() => setActiveTab("questions")}
         >
-          ❓ Question Management ({questions.length})
+          <FaQuestionCircle /> Question Management ({questions.length})
         </button>
       </div>
 
@@ -230,7 +233,7 @@ function AdminPanel() {
                         <div key={idx} className="question-review-item">
                           <div className="question-number">Question {idx + 1}</div>
                           <div className="question-review-content">
-                            <p className="review-question-text">❓ {ans.questionText || ans.question}</p>
+                            <p className="review-question-text"><FaQuestionCircle /> {ans.questionText || ans.question}</p>
 
                             {/* For MCQ questions - show options with user selection and correct answer */}
                             {ans.type === "mcq" ? (
@@ -502,24 +505,24 @@ function AdminPanel() {
         </div>
       )}
 
-         {/* Add/Edit Question Modal */}
+      {/* Add/Edit Question Modal */}
       {showAddForm && (
         <div className="modal-overlay" onClick={() => { setShowAddForm(false); setEditingQuestion(null); }}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <h2 className="head-2">
-  {editingQuestion ? (
-    <>
-      ✏️ Edit Question
-    </>
-  ) : (
-    <>
-      <span className="add-icon">
-        <IoMdAdd />
-      </span>
-      Add New Question
-    </>
-  )}
-</h2>
+            <h2 className="head-2">
+              {editingQuestion ? (
+                <>
+                  ✏️ Edit Question
+                </>
+              ) : (
+                <>
+                  <span className="add-icon">
+                    <IoMdAdd />
+                  </span>
+                  Add New Question
+                </>
+              )}
+            </h2>
             <div className="first-row">
               <div className="form-group">
                 <label>Stream <b>*</b></label>
@@ -609,25 +612,25 @@ function AdminPanel() {
                 ))}
               </select>
             </div>
-       
-          
 
-          <div className="modal-actions">
-            <button onClick={() => { setShowAddForm(false); setEditingQuestion(null); }} className="btn-cancel">
-              Cancel
-            </button>
-            <button
-              onClick={editingQuestion ? handleUpdateQuestion : handleAddQuestion}
-              className="btn-save"
-            >
-              {editingQuestion ? "Update" : "Add"} Question
-            </button>
+
+
+            <div className="modal-actions">
+              <button onClick={() => { setShowAddForm(false); setEditingQuestion(null); }} className="btn-cancel">
+                Cancel
+              </button>
+              <button
+                onClick={editingQuestion ? handleUpdateQuestion : handleAddQuestion}
+                className="btn-save"
+              >
+                {editingQuestion ? "Update" : "Add"} Question
+              </button>
+            </div>
           </div>
         </div>
-          </div>
-  )
-}
-        </div >
-      );
+      )
+      }
+    </div >
+  );
 }
 export default AdminPanel;
