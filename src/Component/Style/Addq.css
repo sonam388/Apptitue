@@ -2,7 +2,7 @@
   width: 420px;
   margin: 40px auto;
   padding: 25px 30px;
-  background: #ffffff;
+  /* background: #ffffff; */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: "Poppins", sans-serif;
@@ -52,6 +52,7 @@
   font-size: 18px;
   margin-top: 50px;
 }
+
 /* 🧾 Question List */
 .question-list {
   list-style: none;
@@ -88,4 +89,149 @@
 
 .delete-btn:hover {
   background-color: #b02a37;
+}
+
+
+/* Add Question Model Css */
+.head-2 {
+  background: linear-gradient(90deg, #1a1a4e, #2a2a6e);
+  color: white;
+  padding: 18px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top: -2px;
+  margin-left: 0px;
+  width: 100%;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.first-row {
+  display: flex;
+  gap: 2px;
+  padding: 10px;
+}
+
+.form-group label {
+  margin: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  color: black
+}
+
+select {
+  font-size: 17px;
+  padding: 10px;
+  width: 300px;
+  /* border: #f5e4e4 solid 1px; */
+  border-radius: 9px;
+  margin-top: 10px;
+}
+
+textarea {
+  width: 98%;
+  border-radius: 9px;
+  font-size: 19px;
+  padding: 9px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.ans-sel {
+  width: 98%;
+  padding: 11px;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.option-input {
+  margin-left: 10px;
+
+}
+
+.option-input {
+  width: 331px;
+  padding: 9px;
+  font-size: 17px;
+  border-radius: 9px;
+  border: 1px solid black;
+}
+
+input:focus {
+  outline: none;
+}
+
+select,
+textarea,
+input:focus {
+  outline: linear-gradient(90deg, #1a1a4e, #2a2a6e) !important;
+
+}
+
+.modal-actions {
+  float: right !important;
+}
+
+.btn-save {
+
+
+  background: linear-gradient(90deg, #1a1a4e, #2a2a6e);
+
+  color: white;
+  padding: 10px;
+  font-size: 19px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+
+}
+
+.btn-cancel {
+  background: #f1f3f6;
+  color: #444;
+  padding: 10px;
+  font-size: 19px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.options-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.option-input {
+  width: 95%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+}
+
+
+b {
+  color: red;
+}
+
+.add-icon {
+  color: rgb(35 66 236);
+  padding: 3px 3px 0px 4px;
+  background: white;
+  border-radius: 50%;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+  top: -3px;
+  right: 5px;
 }

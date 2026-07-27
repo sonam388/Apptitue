@@ -139,6 +139,23 @@
     margin-bottom: 11px;
 }
 
+.answer-label {
+    padding: 8px 1px;
+    color: white;
+    font-size: 18px;
+
+}
+
+.answer-text {
+    border: 1px solid #95a3d9;
+    padding: 21px 9px;
+    margin: 12px 0px;
+    border-radius: 8px;
+    color: white;
+    font-size: 17px;
+
+}
+
 .evaluate-section {
     background: #2b2b4e;
     padding: 25px 16px;

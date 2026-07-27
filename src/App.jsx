@@ -39,10 +39,10 @@ const App = () => {
   return (
     <div className="app-container">
 
-      {/* 🔥 SIDEBAR + NAVBAR HIDE IN ADMIN PANEL */}
+      {/* 🔥 SIDEBAR + NAVBAR HIDE IN ADMIN PANEL
       {!hideLayout && (
         isloggedIn ? <Sidebar /> : <Navbar />
-      )}
+      )} */}
 
       <Routes>
 
