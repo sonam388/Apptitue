@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import axios from "../api/Axios";
-// import "../Style/AdminPanel.css";
+import './Style/AdminPanel.css';
 import axios from "axios";
 
 function AdminPanel() {
@@ -143,7 +143,7 @@ function AdminPanel() {
         alert("Question deleted successfully!");
         fetchQuestions();
       } catch (err) {
-        alert("Failed to delete question",err);
+        alert("Failed to delete question", err);
       }
     }
   };
@@ -389,8 +389,8 @@ function AdminPanel() {
                       {test.answers && test.answers.length > 0
                         ? `Enter Final Score (${test.answers.length} questions):`
                         : testQuestions[test._id] && testQuestions[test._id].length > 0
-                        ? `Enter Score (${testQuestions[test._id].length} questions - old test):`
-                        : "Enter Score:"}
+                          ? `Enter Score (${testQuestions[test._id].length} questions - old test):`
+                          : "Enter Score:"}
                     </label>
                     <input
                       type="number"
@@ -402,9 +402,9 @@ function AdminPanel() {
                       onClick={() => {
                         const scoreInput = document.getElementById(`score-${test._id}`);
                         handleEvaluate(test._id, scoreInput?.value);
-                        
+
                       }}
-                      
+
                       className="btn-submit"
                     >
                       Submit Score
