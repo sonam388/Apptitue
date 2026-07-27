@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 // import axios from "../api/Axios";
 import './Style/AdminPanel.css';
 import axios from "axios";
@@ -489,8 +491,8 @@ function AdminPanel() {
                   )}
                   <div className="question-actions">
                     {console.log(q)}
-                    <button onClick={() => editQuestion(q)} className="btn-edit">✏️ Edit</button>
-                    <button onClick={() => handleDeleteQuestion(q.id)} className="btn-delete">🗑️ Delete</button>
+                    <button onClick={() => editQuestion(q)} className="btn-edit"><FaEdit /> Edit</button>
+                    <button onClick={() => handleDeleteQuestion(q.id)} className="btn-delete"><MdDeleteForever /> Delete</button>
                     {console.log()}
                   </div>
                 </div>
