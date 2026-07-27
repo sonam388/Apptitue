@@ -138,6 +138,7 @@
 }
 .question-text{
     color: black;
+    width: 49%;
     font-size: 20px;
 }
 .question-header{
@@ -220,7 +221,6 @@
     border-radius: 3px;
 }
 
-<<<<<<< HEAD
 .btn-edit{
     padding: 7px 10px 7px 10px;
     color: black;
@@ -241,7 +241,7 @@
 /* filters css */
 .filters{   
     display: flex;
-    justify-content: space-between;
+    gap:12px;
     align-items: center;
     margin-bottom: 23px;
 }
@@ -251,18 +251,4 @@
     border: 1px solid #6d73a7;
     background: transparent;
     color: #8987f5;
-=======
-.filters {
-    margin-bottom: 25px;
-}
-
-.filter-select {
-    padding: 7px 5px;
-    border-radius: 11px;
-    font-size: 15px;
-    background: transparent;
-    color: #98b0fa;
-    margin-left: 9px;
-    border: 1px solid #6262b6;
->>>>>>> 8d1a339c97fb90878778c39f19e6f16699239bbe
 }
