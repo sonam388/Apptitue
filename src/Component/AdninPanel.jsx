@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { IoMdAdd } from "react-icons/io";
 // import axios from "../api/Axios";
 // import "../Style/AdminPanel.css";
 import axios from "axios";
@@ -427,7 +428,7 @@ function AdminPanel() {
               className="btn-add"
               onClick={() => { setShowAddForm(true); resetForm(); setEditingQuestion(null); }}
             >
-              ➕ Add New Question
+              <span className="add-icon"><IoMdAdd /></span> Add New Question
             </button>
           </div>
 
@@ -499,29 +500,43 @@ function AdminPanel() {
         </div>
       )}
 
-      {/* Add/Edit Question Modal */}
+         {/* Add/Edit Question Modal */}
       {showAddForm && (
         <div className="modal-overlay" onClick={() => { setShowAddForm(false); setEditingQuestion(null); }}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{editingQuestion ? "✏️ Edit Question" : "➕ Add New Question"}</h2>
-
-            <div className="form-group">
-              <label>Stream *</label>
-              <select
-                value={formData.stream}
-                onChange={(e) => setFormData({ ...formData, stream: e.target.value })}
-                required
-              >
-                <option value="">Select Stream</option>
-                <option value="MERN">MERN</option>
-                <option value="Python">Python</option>
-                <option value="Java">Java</option>
-              </select>
-            </div>
-
-            <div className="form-row">
+          <h2 className="head-2">
+  {editingQuestion ? (
+    <>
+      ✏️ Edit Question
+    </>
+  ) : (
+    <>
+      <span className="add-icon">
+        <IoMdAdd />
+      </span>
+      Add New Question
+    </>
+  )}
+</h2>
+            <div className="first-row">
               <div className="form-group">
-                <label>Level *</label>
+                <label>Stream <b>*</b></label>
+                <br />
+                <select
+                  value={formData.stream}
+                  onChange={(e) => setFormData({ ...formData, stream: e.target.value })}
+                  required
+                >
+                  <option value="">Select Stream</option>
+                  <option value="MERN">MERN</option>
+                  <option value="Python">Python</option>
+                  <option value="Java">Java</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Level<b>*</b></label>
+                <br />
                 <select
                   value={formData.level}
                   onChange={(e) => setFormData({ ...formData, level: e.target.value })}
@@ -532,7 +547,8 @@ function AdminPanel() {
                 </select>
               </div>
               <div className="form-group">
-                <label>Type *</label>
+                <label>Type<b>*</b></label>
+                <br />
                 <select
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value })}
@@ -543,8 +559,10 @@ function AdminPanel() {
               </div>
             </div>
 
+
             <div className="form-group">
-              <label>Question *</label>
+              <label>Question <b>*</b></label>
+              <br />
               <textarea
                 value={formData.question}
                 onChange={(e) => setFormData({ ...formData, question: e.target.value })}
@@ -556,50 +574,58 @@ function AdminPanel() {
 
             {formData.type === "mcq" && (
               <>
-                <label>Options *</label>
-                {formData.options.map((opt, i) => (
-                  <input
-                    key={i}
-                    type="text"
-                    value={opt}
-                    onChange={(e) => handleOptionChange(i, e.target.value)}
-                    placeholder={`Option ${i + 1}`}
-                    className="option-input"
-                  />
-                ))}
+                <label>Options<b>*</b></label>
 
-                <div className="form-group">
-                  <label>Correct Answer *</label>
-                  <select
-                    value={formData.correctAnswer}
-                    onChange={(e) => setFormData({ ...formData, correctAnswer: e.target.value })}
-                    required
-                  >
-                    <option value="">Select Correct Answer</option>
-                    {formData.options.filter(o => o.trim()).map((opt, i) => (
-                      <option key={i} value={opt}>{opt}</option>
-                    ))}
-                  </select>
+                <div className="options-container">
+                  {formData.options.map((opt, i) => (
+                    <input
+                      key={i}
+                      type="text"
+                      value={opt}
+                      onChange={(e) => handleOptionChange(i, e.target.value)}
+                      placeholder={`Option ${i + 1}`}
+                      className="option-input"
+                    />
+                  ))}
                 </div>
               </>
             )}
 
-            <div className="modal-actions">
-              <button onClick={() => { setShowAddForm(false); setEditingQuestion(null); }} className="btn-cancel">
-                Cancel
-              </button>
-              <button
-                onClick={editingQuestion ? handleUpdateQuestion : handleAddQuestion}
-                className="btn-save"
+
+
+            <div className="form-group">
+              <label>Correct Answer<b>*</b></label>
+              <br />
+              <select
+                value={formData.correctAnswer}
+                onChange={(e) => setFormData({ ...formData, correctAnswer: e.target.value })}
+                required className="ans-sel"
               >
-                {editingQuestion ? "Update" : "Add"} Question
-              </button>
+                <option value="">Select Correct Answer</option>
+                {formData.options.filter(o => o.trim()).map((opt, i) => (
+                  <option key={i} value={opt}>{opt}</option>
+                ))}
+              </select>
             </div>
+       
+          
+
+          <div className="modal-actions">
+            <button onClick={() => { setShowAddForm(false); setEditingQuestion(null); }} className="btn-cancel">
+              Cancel
+            </button>
+            <button
+              onClick={editingQuestion ? handleUpdateQuestion : handleAddQuestion}
+              className="btn-save"
+            >
+              {editingQuestion ? "Update" : "Add"} Question
+            </button>
           </div>
         </div>
-      )}
-    </div>
-  );
+          </div>
+  )
 }
-
+        </div >
+      );
+}
 export default AdminPanel;
