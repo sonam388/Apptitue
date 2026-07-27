@@ -180,3 +180,17 @@
     border: 1px solid green;
     border-radius: 3px;
 }
+
+.filters {
+    margin-bottom: 25px;
+}
+
+.filter-select {
+    padding: 7px 5px;
+    border-radius: 11px;
+    font-size: 15px;
+    background: transparent;
+    color: #98b0fa;
+    margin-left: 9px;
+    border: 1px solid #6262b6;
+}
