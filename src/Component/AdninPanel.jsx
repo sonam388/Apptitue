@@ -8,6 +8,7 @@ import axios from "axios";
 import { GrUserAdmin } from "react-icons/gr";
 import { FaQuestionCircle } from "react-icons/fa";
 import { MdOutlinePendingActions } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
 
 function AdminPanel() {
   const [activeTab, setActiveTab] = useState("pending");
@@ -435,6 +436,7 @@ function AdminPanel() {
             >
               <span className="add-icon"><IoMdAdd /></span> Add New Question
             </button>
+
           </div>
 
           {/* Filters */}
@@ -520,6 +522,8 @@ function AdminPanel() {
                     <IoMdAdd />
                   </span>
                   Add New Question
+                  <button className="close-btn" onClick={() => setShowAddForm(false)}><IoMdClose /></button>
+
                 </>
               )}
             </h2>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import "./Style/Exam.css";
+import Editor from "@monaco-editor/react";
 
 const Exam = () => {
 
@@ -9,6 +10,9 @@ const Exam = () => {
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(1800);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [searchParama] = useSearchParams()
+  const language = searchParama.get("stream")
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -179,6 +183,7 @@ const Exam = () => {
     return <div className="loader">Loading Test...</div>;
   }
 
+
   return (
 
     <div className="simple-exam-page">
@@ -213,11 +218,14 @@ const Exam = () => {
             }
 
             {(q.type === "coding" || q.type === "written") && (
-              <textarea
+              <Editor
+                height="300px"
+                defaultLanguage={language == "MERN" ? "javascript" : "python"}
                 placeholder="Write your answer here..."
                 className="coding-box"
                 value={answers[qIndex] || ""}
                 onChange={(e) => handleWrittenAnswer(qIndex, e.target.value)}
+                theme="vs-dark"
               />
             )}
 

@@ -96,7 +96,7 @@
 }
 
 .badge.stream {
-        background: #b0d2ff;
+    background: #b0d2ff;
     color: #027d02;
     border: 1px solid #068d06;
     padding: 7px;
@@ -107,15 +107,21 @@
     background: #2d4a1e;
     color: #90ee90;
     border: #90ee90;
-     padding: 7px;
+    padding: 7px;
     font-size: 16px;
 }
 
-.badge.type{
+.badge.type {
     padding: 7px;
     font-size: 16px;
     color: #386b97;
 }
+
+.badge.status {
+    font-size: 16px;
+    margin-top: 4px;
+}
+
 .questions-review {
     padding: 19px 5px;
 }
@@ -136,18 +142,22 @@
     font-weight: bold;
     letter-spacing: 1px;
 }
-.question-text{
+
+.question-text {
     color: black;
     font-size: 20px;
+
 }
-.question-header{
-    margin-top:15px;
+
+.question-header {
+    margin-top: 15px;
     display: flex;
-    gap:4px;
+    gap: 4px;
 }
-.question-actions{
+
+.question-actions {
     display: flex;
-    gap:10px;
+    gap: 10px;
 }
 
 .question-review-content {
@@ -207,6 +217,10 @@
     border-radius: 7px;
 }
 
+.close-btn {
+    float: right;
+}
+
 
 /* ====== question section ========= */
 .btn-add {
@@ -220,15 +234,15 @@
     border-radius: 3px;
 }
 
-<<<<<<< HEAD
-.btn-edit{
+.btn-edit {
     padding: 7px 10px 7px 10px;
     color: black;
     font-size: 19px;
     border: 1px solid #d2d214;
     border-radius: 28px;
 }
-.btn-delete{
+
+.btn-delete {
     padding: 7px 10px 7px 10px;
     color: black;
     font-size: 19px;
@@ -239,30 +253,16 @@
 
 
 /* filters css */
-.filters{   
+.filters {
     display: flex;
-    justify-content: space-between;
+    gap: 12px;
     align-items: center;
     margin-bottom: 23px;
 }
 
-.filter-select{
-        width: 130px;
+.filter-select {
+    width: 130px;
     border: 1px solid #6d73a7;
     background: transparent;
     color: #8987f5;
-=======
-.filters {
-    margin-bottom: 25px;
-}
-
-.filter-select {
-    padding: 7px 5px;
-    border-radius: 11px;
-    font-size: 15px;
-    background: transparent;
-    color: #98b0fa;
-    margin-left: 9px;
-    border: 1px solid #6262b6;
->>>>>>> 8d1a339c97fb90878778c39f19e6f16699239bbe
 }
