@@ -145,6 +145,7 @@
 
 .question-text {
     color: black;
+    width: 49%;
     font-size: 20px;
 
 }
@@ -234,7 +235,8 @@
     border-radius: 3px;
 }
 
-.btn-edit {
+<<<<<<< HEAD
+.btn-edit{
     padding: 7px 10px 7px 10px;
     color: black;
     font-size: 19px;
@@ -255,7 +257,7 @@
 /* filters css */
 .filters {
     display: flex;
-    gap: 12px;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 23px;
 }
