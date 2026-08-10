@@ -20,6 +20,8 @@ function AdminPanel() {
   const [filters, setFilters] = useState({ stream: "", level: "", type: "" });
   const [testQuestions, setTestQuestions] = useState({}); // Store questions for each test
   const [loadingQuestions, setLoadingQuestions] = useState({});
+  const [searchName, setSearchName] = useState("");
+  const [searchDate, setSearchDate] = useState("");
 
   // Form state for add/edit
   const [formData, setFormData] = useState({
@@ -211,10 +213,37 @@ function AdminPanel() {
       {activeTab === "pending" && (
         <div className="tab-content">
           <h2>Pending Test Reviews</h2>
+
+          {/* Search Bar */}
+          <div className="pending-search-bar">
+            <input
+              type="text"
+              placeholder="🔍 Search by name..."
+              value={searchName}
+              onChange={(e) => setSearchName(e.target.value)}
+              className="search-input"
+            />
+            <input
+              type="date"
+              value={searchDate}
+              onChange={(e) => setSearchDate(e.target.value)}
+              className="search-input"
+            />
+            {(searchName || searchDate) && (
+              <button className="clear-search-btn" onClick={() => { setSearchName(""); setSearchDate(""); }}>✕ Clear</button>
+            )}
+          </div>
+
           {pendingTests.length === 0 ? (
             <p className="empty-state">✅ No tests pending review</p>
           ) : (
-            pendingTests.map((test) => (
+            pendingTests
+              .filter((test) => {
+                const nameMatch = searchName === "" || (test.userId?.name || "").toLowerCase().includes(searchName.toLowerCase());
+                const dateMatch = searchDate === "" || new Date(test.createdAt).toLocaleDateString("en-CA") === searchDate;
+                return nameMatch && dateMatch;
+              })
+              .map((test) => (
               <div key={test._id} className="test-card">
                 <div className="test-header">
                   {console.log(test)}
