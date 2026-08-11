@@ -32,7 +32,6 @@ function AdminPanel() {
     options: ["", "", "", ""],
     correctAnswer: ""
   });
-
   // Fetch pending tests
   const fetchPending = async () => {
     try {

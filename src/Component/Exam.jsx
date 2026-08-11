@@ -224,7 +224,7 @@ const Exam = () => {
                 placeholder="Write your answer here..."
                 className="coding-box"
                 value={answers[qIndex] || ""}
-                onChange={(e) => handleWrittenAnswer(qIndex, e.target.value)}
+                onChange={(value) => handleWrittenAnswer(qIndex, value)}
                 theme="vs-dark"
               />
             )}
