@@ -48,6 +48,16 @@ const Streem = () => {
           </Link>
         </div>
 
+        <div className="stream-card hard">
+          <Link className="card-link" to="/category/Java">
+            <div className="card-content">
+              <h3>Java</h3>
+              <p>loop , conditions , logic</p>
+              <span className="arrow-btn">Start Test →</span>
+            </div>
+          </Link>
+        </div>
+
       </div>
     </div>
   )
