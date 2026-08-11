@@ -187,6 +187,12 @@ function AdminPanel() {
     setFormData({ ...formData, options: newOptions });
   };
 
+  const filteredTests = pendingTests.filter((test) => {
+    const nameMatch = searchName === "" || (test.userId?.name || "").toLowerCase().includes(searchName.toLowerCase());
+    const dateMatch = searchDate === "" || new Date(test.createdAt).toLocaleDateString("en-CA") === searchDate;
+    return nameMatch && dateMatch;
+  });
+
   console.log(pendingTests)
 
   return (
@@ -236,14 +242,13 @@ function AdminPanel() {
 
           {pendingTests.length === 0 ? (
             <p className="empty-state">✅ No tests pending review</p>
+          ) : filteredTests.length === 0 ? (
+            <div className="no-result-found">
+              <p>No results found</p>
+              <span>{searchName && `Name: "${searchName}"`} {searchDate && `Date: ${searchDate}`}</span>
+            </div>
           ) : (
-            pendingTests
-              .filter((test) => {
-                const nameMatch = searchName === "" || (test.userId?.name || "").toLowerCase().includes(searchName.toLowerCase());
-                const dateMatch = searchDate === "" || new Date(test.createdAt).toLocaleDateString("en-CA") === searchDate;
-                return nameMatch && dateMatch;
-              })
-              .map((test) => (
+            filteredTests.map((test) => (
               <div key={test._id} className="test-card">
                 <div className="test-header">
                   {console.log(test)}

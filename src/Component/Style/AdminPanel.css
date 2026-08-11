@@ -311,3 +311,20 @@
 .clear-search-btn:hover {
   background: rgba(255, 80, 80, 0.3);
 }
+
+/* ====== No Result Found ====== */
+.no-result-found {
+  text-align: center;
+  padding: 40px 20px;
+  color: #a0a0c0;
+}
+
+.no-result-found p {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.no-result-found span {
+  font-size: 0.9rem;
+  color: #6b6b8a;
+}
