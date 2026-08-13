@@ -5,6 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 // import axios from "../api/Axios";
 import './Style/AdminPanel.css';
 import axios from "axios";
+import BASE_URL from "../api/config";
 import { GrUserAdmin } from "react-icons/gr";
 import { FaQuestionCircle } from "react-icons/fa";
 import { MdOutlinePendingActions } from "react-icons/md";
@@ -34,7 +35,7 @@ function AdminPanel() {
   // Fetch pending tests
   const fetchPending = async () => {
     try {
-      const res = await axios.get("https://apptitute-backend-final.onrender.com/api/admin/pending-tests");
+      const res = await axios.get(`${BASE_URL}/api/admin/pending-tests`);
       const tests = res.data;
       setPendingTests(tests);
 
@@ -46,7 +47,7 @@ function AdminPanel() {
             // Fetch questions based on stream and level
             const stream = test.stream || 'MERN';
             const level = test.level;
-            const qRes = await axios.get(`https://apptitute-backend-final.onrender.com/api/questions?stream=${stream}&level=${level}`);
+            const qRes = await axios.get(`${BASE_URL}/api/questions?stream=${stream}&level=${level}`);
             setTestQuestions(prev => ({
               ...prev,
               [test._id]: qRes.data
@@ -66,7 +67,7 @@ function AdminPanel() {
   // Fetch all questions
   const fetchQuestions = async () => {
     try {
-      const res = await axios.get("https://apptitute-backend-final.onrender.com/api/admin/getfullq");
+      const res = await axios.get(`${BASE_URL}/api/admin/getfullq`);
       setQuestions(res.data.questions || res.data);
       setFilteredQuestions(res.data.questions || res.data);
     } catch (err) {
@@ -97,7 +98,7 @@ function AdminPanel() {
   const handleEvaluate = async (attemptId, score) => {
     try {
       if (!score && score !== 0) return alert("Please enter a score first!");
-      await axios.post("https://apptitute-backend-final.onrender.com/api/admin/evaluate", { attemptId, manualScore: score });
+      await axios.post(`${BASE_URL}/api/admin/evaluate`, { attemptId, manualScore: score });
       alert("Evaluation saved!");
       fetchPending();
     } catch (err) {
@@ -114,7 +115,7 @@ function AdminPanel() {
         delete data.options;
         delete data.correctAnswer;
       }
-      await axios.post("https://apptitute-backend-final.onrender.com/api/admin/questions", data);
+      await axios.post(`${BASE_URL}/api/admin/questions`, data);
       alert("Question added successfully!");
       setShowAddForm(false);
       resetForm();
@@ -133,7 +134,7 @@ function AdminPanel() {
         data.options = [];
         data.correctAnswer = "";
       }
-      await axios.put(`https://apptitute-backend-final.onrender.com/api/admin/questions/${editingQuestion._id}`, data);
+      await axios.put(`${BASE_URL}/api/admin/questions/${editingQuestion._id}`, data);
       alert("Question updated successfully!");
       setEditingQuestion(null);
       resetForm();
@@ -146,7 +147,7 @@ function AdminPanel() {
   const handleDeleteQuestion = async (id) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
-        await axios.delete(`https://apptitute-backend-final.onrender.com/api/admin/questions/${id}`);
+        await axios.delete(`${BASE_URL}/api/admin/questions/${id}`);
         alert("Question deleted successfully!");
         fetchQuestions();
       } catch (err) {

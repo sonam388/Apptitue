@@ -12,23 +12,14 @@ export const Authprovider = ({children}) => {
 
     useEffect(() => {
         const sequence = async () => {
-            // Cinematic Loading Sequence
-            setTimeout(() => setSystemMsg("ESTABLISHING SECURE UPLINK..."), 800)
-            setTimeout(() => setSystemMsg("VERIFYING BIOMETRICS..."), 1800)
-            setTimeout(() => setSystemMsg("DECRYPTING USER DATA..."), 2800)
-            
-            const token = localStorage.getItem('token')
-            
-            // Final Check
+            setTimeout(() => setSystemMsg("ESTABLISHING SECURE UPLINK..."), 500)
+            setTimeout(() => setSystemMsg("VERIFYING CREDENTIALS..."), 1000)
             setTimeout(() => {
+                const token = localStorage.getItem('token')
                 setSystemMsg(token ? "ACCESS GRANTED. WELCOME." : "ACCESS DENIED. REDIRECTING...")
-            }, 3800)
-
-            // Finish Loading
-            setTimeout(() => {
                 setIsloggedIn(!!token)
                 setLoading(false)
-            }, 4500) // 4.5 Seconds total for the full visual effect
+            }, 1800)
         }
         sequence()
     }, [])

@@ -35,7 +35,7 @@ const Login = () => {
     // router.post("/login"
     try {
       const response = await axios.post(
-        "https://apptitute-backend-final.onrender.com/api/auth/login",
+        "http://localhost:5000/api/auth/login",
         { email, password }
       );
 
@@ -45,9 +45,9 @@ const Login = () => {
       const previousUserId = localStorage.getItem("userId");
 
       localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("userId", user._id);
-      localStorage.setItem("userEmail", user.email);
-      localStorage.setItem("userName", user.name);
+      localStorage.setItem("userId", user.userId);
+      localStorage.setItem("userEmail", user.userEmail);
+      localStorage.setItem("userName", user.userName);
 
       if (previousUserId && previousUserId !== user._id) {
         localStorage.removeItem("examHistory");
@@ -75,7 +75,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('https://apptitute-backend-final.onrender.com/api/auth/signup', {
+      const res = await axios.post('http://localhost:5000/api/auth/signup', {
         name,
         email,
         password
