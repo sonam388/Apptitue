@@ -28,7 +28,7 @@ const Streem = () => {
 
         {/* PYTHON */}
         <div className="stream-card medium">
-          <Link className="card-link" to="/category/PYTHON">
+          <Link className="card-link" to="/category/Python">
             <div className="card-content">
               <h3>Python Dev</h3>
               <p>Core Python, Django</p>
@@ -39,7 +39,7 @@ const Streem = () => {
 
         {/* DATA SCIENCE */}
         <div className="stream-card hard">
-          <Link className="card-link" to="/category/DATASCIENCE">
+          <Link className="card-link" to="/category/DataScience">
             <div className="card-content">
               <h3>Data Science</h3>
               <p>ML, AI, Pandas</p>

@@ -27,7 +27,7 @@ const Category = () => {
 
         <div className="level-card medium">
           <Link 
-            to={`/Exam?stream=${stream}&level=medium&course=${course}`}
+            to={stream === "MERN" ? `/written-exam?stream=${stream}&level=medium` : `/Exam?stream=${stream}&level=medium&course=${course}`}
             className='boxc-l2'>
             <span>Medium</span>
           </Link>

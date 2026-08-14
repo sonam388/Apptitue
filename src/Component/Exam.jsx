@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import "./Style/Exam.css";
 import Editor from "@monaco-editor/react";
+import BASE_URL from "../api/config";
 
 const Exam = () => {
 
@@ -10,6 +11,8 @@ const Exam = () => {
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(1800);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const [searchParama] = useSearchParams()
   const language = searchParama.get("stream")
@@ -18,7 +21,7 @@ const Exam = () => {
   const location = useLocation();
 
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user.userId)
+  const userId = user?.userId || user?._id;
 
   const queryParams = new URLSearchParams(location.search);
   const stream = queryParams.get("stream");
@@ -30,31 +33,39 @@ const Exam = () => {
 
     const fetchQuestions = async () => {
       try {
+        setLoading(true);
+        setError("");
 
-        let url = `https://apptitute-backend-final.onrender.com/api/questions?stream=${stream}&level=${level}`;
-
-        const res = await axios.get(url);
+        const res = await axios.get(`${BASE_URL}/api/questions?stream=${stream}&level=${level}`);
 
         const formatted = res.data.map(q => ({
           ...q,
-          options: q.type === "mcq" && q.options ? JSON.parse(q.options) : []
+          options: q.type === "mcq" && q.options
+            ? (Array.isArray(q.options) ? q.options : JSON.parse(q.options))
+            : []
         }));
 
-        setQuestions(formatted);
+        if (formatted.length === 0) {
+          setError("No questions found for this stream/level. Please contact admin.");
+        }
 
+        setQuestions(formatted);
       } catch (err) {
         console.error("API ERROR:", err);
+        setError("Failed to load questions. Please check your connection and try again.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    if (stream && level) fetchQuestions();
+    if (stream && level) {
+      fetchQuestions();
+    } else {
+      setError("Invalid URL: stream or level missing.");
+      setLoading(false);
+    }
 
   }, [stream, level, course]);
-
-  // MCQ
-  const handleOptionSelect = (qIndex, value) => {
-    setAnswers(prev => ({ ...prev, [qIndex]: value }));
-  };
 
   // WRITTEN
   const handleWrittenAnswer = (qIndex, value) => {
@@ -63,98 +74,35 @@ const Exam = () => {
 
   // SUBMIT
   const handleFinishExam = async () => {
-
     setIsSubmitting(true);
-
-    let mcqScore = 0;
-    let writtenAnswers = [];
-
-    questions.forEach((q, i) => {
-
-      if (q.type === "mcq") {
-
-        if (
-          answers[i] &&
-          q.correctAnswer &&
-          answers[i].toString().trim().toLowerCase() ===
-          q.correctAnswer.toString().trim().toLowerCase()
-        ) {
-          mcqScore++;
-        }
-
-      }
-
-      else if (q.type === "coding" || q.type === "written") {
-
-        writtenAnswers.push({
-          question: q.question,
-          userAnswer: answers[i] || "",
-          correctAnswer: q.correctAnswer || ""
-        });
-
-      }
-
-    });
-
     try {
+      const token = localStorage.getItem("token");
 
-      // 🔥 WRITTEN TEST SEND TO ADMIN
+      const writtenAnswers = questions
+        .filter(q => q.type === "coding" || q.type === "written")
+        .map((q) => ({
+          question: q.question,
+          userAnswer: answers[questions.findIndex(x => x._id === q._id)] || "",
+        }));
+
+      let aiResult = null;
       if (writtenAnswers.length > 0) {
-
-        await axios.post(
-          "https://apptitute-backend-final.onrender.com/api/admin/submit-written",
-          {
-            userId: user.userId,
-            stream,
-            level,
-            answers: writtenAnswers,
-            score: mcqScore
-          }
+        const res = await axios.post(
+          `${BASE_URL}/api/test/ai-evaluate`,
+          { userId, answers: writtenAnswers, stream, level },
+          { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        alert("Written Test Sent To Admin For Review!");
-
-        navigate("/result", {
-          state: {
-            message: "Written Test Submitted Successfully. Admin Will Evaluate Soon."
-          }
-        });
-
-        return;
+        aiResult = res.data;
       }
 
-      // ONLY MCQ
-      const percentage = ((mcqScore / questions.length) * 100).toFixed(2);
-      const isPass = Number(percentage) >= 60;
-
-      const history = JSON.parse(localStorage.getItem("examHistory")) || [];
-
-      const newRecord = {
-        date: new Date().toLocaleString(),
-        score: mcqScore,
-        total: questions.length,
-        percentage,
-        isPass,
-        stream,
-        level,
-        course
-      };
-
-      localStorage.setItem("examHistory", JSON.stringify([...history, newRecord]));
-
-      navigate("/result", {
-        state: { questions, answers }
-      });
+      navigate("/result", { state: { questions, answers, aiResult } });
 
     } catch (err) {
-
       console.error("Submission Error:", err);
-      alert("Error submitting written test");
-
+      alert("Error submitting test: " + (err.response?.data?.message || err.message));
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
-
   };
 
   // TIMER
@@ -179,8 +127,17 @@ const Exam = () => {
     return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
   };
 
-  if (questions.length === 0) {
+  if (loading) {
     return <div className="loader">Loading Test...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="loader" style={{ flexDirection: "column", gap: "16px" }}>
+        <p style={{ color: "#ff6b6b" }}>{error}</p>
+        <button onClick={() => window.history.back()} style={{ padding: "8px 20px", cursor: "pointer" }}>Go Back</button>
+      </div>
+    );
   }
 
 
@@ -224,7 +181,7 @@ const Exam = () => {
                 placeholder="Write your answer here..."
                 className="coding-box"
                 value={answers[qIndex] || ""}
-                onChange={(value) => handleWrittenAnswer(qIndex, value)}
+                onChange={(e) => handleWrittenAnswer(qIndex, e.target.value)}
                 theme="vs-dark"
               />
             )}

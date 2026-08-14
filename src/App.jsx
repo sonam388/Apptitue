@@ -19,6 +19,7 @@ import Streem from "./Component/Streem";
 import Python from "./Component/Python";
 import DataSc from "./Component/DataSc";
 import AdminPanel from './Component/AdninPanel'
+import WrittenExam from './Component/WrittenExam'
 
 const App = () => {
 
@@ -69,8 +70,10 @@ const App = () => {
 
         {/* EXAM */}
         <Route path="/exam" element={<Exam />} />
+        <Route path="/Exam" element={<Exam />} />
 
-        {/* 🔥 ADMIN PANEL FULL SCREEN */}
+        <Route path="/written-exam" element={<WrittenExam />} />
+
         <Route path="/addQues" element={<AdminPanel />} />
 
         <Route path="/python" element={<Python />} />

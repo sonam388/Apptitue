@@ -16,7 +16,7 @@ const TestPage = () => {
       id: 2, 
       title: 'HTML / CSS', 
       desc: 'Master the Web Layouts', 
-      path: '/category', 
+      path: '/category/MERN', 
       external: false,
       color: '#4ECDC4' // Teal Accent
     },
@@ -24,7 +24,7 @@ const TestPage = () => {
       id: 3, 
       title: 'JavaScript', 
       desc: 'Logic & Functionality', 
-      path: '/category', 
+      path: '/category/MERN', 
       external: false,
       color: '#FFE66D' // Yellow Accent
     },
@@ -32,7 +32,7 @@ const TestPage = () => {
       id: 4, 
       title: 'React.JS', 
       desc: 'Modern Frontend Library', 
-      path: '/category', 
+      path: '/category/MERN', 
       external: false,
       color: '#1A535C' // Dark Blue Accent
     },
@@ -40,7 +40,7 @@ const TestPage = () => {
       id: 5, 
       title: 'MongoDB / Node', 
       desc: 'Backend & Database', 
-      path: '/category', 
+      path: '/category/MERN', 
       external: false,
       color: '#95E1D3' // Mint Accent
     },
