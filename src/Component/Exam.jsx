@@ -68,9 +68,16 @@ const Exam = () => {
   }, [stream, level, course]);
 
   // WRITTEN
-  const handleWrittenAnswer = (qIndex, value) => {
-    setAnswers(prev => ({ ...prev, [qIndex]: value }));
-  };
+  // const handleWrittenAnswer = (qIndex, value) => {
+  //   setAnswers(prev => ({ ...prev, [qIndex]: value }));
+  // };
+
+  const handleWrittenAnswer = (index, value) => {
+  setAnswers((prev) => ({
+    ...prev,
+    [index]: value,
+  }));
+}
 
   // SUBMIT
   const handleFinishExam = async () => {
@@ -181,7 +188,8 @@ const Exam = () => {
                 placeholder="Write your answer here..."
                 className="coding-box"
                 value={answers[qIndex] || ""}
-                onChange={(e) => handleWrittenAnswer(qIndex, e.target.value)}
+                // onChange={(e) => handleWrittenAnswer(qIndex, e.target.value)}
+                onChange={(value) => handleWrittenAnswer(qIndex, value || "")}
                 theme="vs-dark"
               />
             )}
